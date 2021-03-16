@@ -18,7 +18,7 @@ jobs:
           args: --acl public-read --delete
         env:
           AWS_S3_BUCKET: "moa-ip"
-          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.ACCESS_SECRET_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY.ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_ACCESS_KEY.ACCESS_SECRET_KEY }}
           AWS_REGION: "ap-northeast-2"
           SOURCE_DIR: "."
