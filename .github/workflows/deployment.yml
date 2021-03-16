@@ -1,0 +1,24 @@
+name: Deployment
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --delete
+        env:
+          AWS_S3_BUCKET: "moa-ip"
+          AWS_ACCESS_KEY_ID: ${{ACCESS_KEY}}
+          AWS_SECRET_ACCESS_KEY: ${{ACCESS_SECRET_KEY}}
+          AWS_REGION: "ap-northeast-2"
+          SOURCE_DIR: "."
